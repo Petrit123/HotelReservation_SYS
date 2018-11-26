@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d93635ebafa549489d0b3ef4af62e19d" Name="Diagram1">
+        <EntityTypeShape EntityType="HotelModel.ADMIN" Width="1.5" PointX="3" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.CUSTOMER" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.RESERVATION" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.ROOMRATE" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.ROOM" Width="1.5" PointX="3" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.ALL_CHECK_INS_TODAY" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.GET_CUST_NAME_FOR_CANCEL" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HotelModel.ROOMS_NOT_CURRENTLY_IN_USE" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="HotelModel.FK_RESERVATIONS_ADMINS" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelModel.FK_RESERVATIONS_CUSTOMERS" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelModel.FK_RESERVATIONS_ROOMS" ManuallyRouted="false" />
+        <AssociationConnector Association="HotelModel.FK_ROOMS_ROOMRATES" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

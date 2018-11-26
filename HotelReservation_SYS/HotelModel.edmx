@@ -1,0 +1,530 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HotelModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ADMINS">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="USERNAME" Type="varchar2" MaxLength="12" Nullable="false" />
+          <Property Name="PASSWORD" Type="varchar2" MaxLength="12" Nullable="false" />
+          <Property Name="FAILED_ATTEMPTS" Type="number" Precision="1" Scale="0" />
+          <Property Name="BLOCK_TIME" Type="timestamp" Precision="6" />
+        </EntityType>
+        <EntityType Name="CUSTOMERS">
+          <Key>
+            <PropertyRef Name="CUST_ID" />
+          </Key>
+          <Property Name="CUST_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="FORENAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="DOB" Type="date" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar2" MaxLength="30" />
+          <Property Name="MOBILE_NO" Type="varchar2" MaxLength="15" />
+          <Property Name="LOYALTY" Type="varchar2" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="RESERVATIONS">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="CUST_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="date" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="date" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="number" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="RES_STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROOMRATES">
+          <Key>
+            <PropertyRef Name="ROOM_TYPE" />
+          </Key>
+          <Property Name="ROOM_TYPE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="varchar2" MaxLength="30" Nullable="false" />
+          <Property Name="RATE" Type="number" Precision="5" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROOMS">
+          <Key>
+            <PropertyRef Name="ROOM_NO" />
+          </Key>
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ROOM_TYPE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.ALL_CHECK_INS_TODAY' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ALL_CHECK_INS_TODAY">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ADMIN_ID" />
+            <PropertyRef Name="DATE_ARRIVE" />
+            <PropertyRef Name="DATE_DEPART" />
+            <PropertyRef Name="TOTAL_COST" />
+            <PropertyRef Name="CHECK_IN" />
+            <PropertyRef Name="CHECK_OUT" />
+            <PropertyRef Name="RES_STATUS" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="CUST_ID" Type="number" Precision="3" Scale="0" />
+          <Property Name="DATE_ARRIVE" Type="date" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="date" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="number" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="varchar2" MaxLength="1" Nullable="false" />
+          <Property Name="RES_STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.GET_CUST_NAME_FOR_CANCEL' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GET_CUST_NAME_FOR_CANCEL">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+          </Key>
+          <Property Name="RES_ID" Type="number" Precision="6" Scale="0" Nullable="false" />
+          <Property Name="FORENAME" Type="varchar2" MaxLength="20" Nullable="false" />
+          <Property Name="SURNAME" Type="varchar2" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SYSTEM.ROOMS_NOT_CURRENTLY_IN_USE' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ROOMS_NOT_CURRENTLY_IN_USE">
+          <Key>
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ROOM_TYPE" />
+            <PropertyRef Name="STATUS" />
+          </Key>
+          <Property Name="ROOM_NO" Type="number" Precision="3" Scale="0" Nullable="false" />
+          <Property Name="ROOM_TYPE" Type="varchar2" MaxLength="3" Nullable="false" />
+          <Property Name="STATUS" Type="varchar2" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RESERVATIONS_ADMINS">
+          <End Role="ADMINS" Type="Self.ADMINS" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADMINS">
+              <PropertyRef Name="ADMIN_ID" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="ADMIN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATIONS_CUSTOMERS">
+          <End Role="CUSTOMERS" Type="Self.CUSTOMERS" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMERS">
+              <PropertyRef Name="CUST_ID" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="CUST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATIONS_ROOMS">
+          <End Role="ROOMS" Type="Self.ROOMS" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATIONS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOMS">
+              <PropertyRef Name="ROOM_NO" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="ROOM_NO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROOMS_ROOMRATES">
+          <End Role="ROOMRATES" Type="Self.ROOMRATES" Multiplicity="1" />
+          <End Role="ROOMS" Type="Self.ROOMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOMRATES">
+              <PropertyRef Name="ROOM_TYPE" />
+            </Principal>
+            <Dependent Role="ROOMS">
+              <PropertyRef Name="ROOM_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SP_ADMINLOGINCHECK" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="GET_ENTERED_USERNAME" Type="varchar2" Mode="In" />
+          <Parameter Name="GET_ENTERED_PASSWORD" Type="varchar2" Mode="In" />
+          <Parameter Name="GET_EXISTING_USERNAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="GET_EXISTING_PASSWORD" Type="varchar2" Mode="Out" />
+          <Parameter Name="GET_FAILED_ATTEMPTS" Type="number" Mode="InOut" />
+          <Parameter Name="GET_BLOCKTIME" Type="timestamp" Mode="Out" />
+        </Function>
+        <EntityContainer Name="HotelModelStoreContainer">
+          <EntitySet Name="ADMINS" EntityType="Self.ADMINS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="RESERVATIONS" EntityType="Self.RESERVATIONS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ROOMRATES" EntityType="Self.ROOMRATES" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ROOMS" EntityType="Self.ROOMS" Schema="SYSTEM" store:Type="Tables" />
+          <EntitySet Name="ALL_CHECK_INS_TODAY" EntityType="Self.ALL_CHECK_INS_TODAY" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"ALL_CHECK_INS_TODAY"."RES_ID" AS "RES_ID", 
+"ALL_CHECK_INS_TODAY"."ROOM_NO" AS "ROOM_NO", 
+"ALL_CHECK_INS_TODAY"."ADMIN_ID" AS "ADMIN_ID", 
+"ALL_CHECK_INS_TODAY"."CUST_ID" AS "CUST_ID", 
+"ALL_CHECK_INS_TODAY"."DATE_ARRIVE" AS "DATE_ARRIVE", 
+"ALL_CHECK_INS_TODAY"."DATE_DEPART" AS "DATE_DEPART", 
+"ALL_CHECK_INS_TODAY"."TOTAL_COST" AS "TOTAL_COST", 
+"ALL_CHECK_INS_TODAY"."CHECK_IN" AS "CHECK_IN", 
+"ALL_CHECK_INS_TODAY"."CHECK_OUT" AS "CHECK_OUT", 
+"ALL_CHECK_INS_TODAY"."RES_STATUS" AS "RES_STATUS"
+FROM "SYSTEM"."ALL_CHECK_INS_TODAY" "ALL_CHECK_INS_TODAY"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GET_CUST_NAME_FOR_CANCEL" EntityType="Self.GET_CUST_NAME_FOR_CANCEL" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"GET_CUST_NAME_FOR_CANCEL"."RES_ID" AS "RES_ID", 
+"GET_CUST_NAME_FOR_CANCEL"."FORENAME" AS "FORENAME", 
+"GET_CUST_NAME_FOR_CANCEL"."SURNAME" AS "SURNAME"
+FROM "SYSTEM"."GET_CUST_NAME_FOR_CANCEL" "GET_CUST_NAME_FOR_CANCEL"</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ROOMS_NOT_CURRENTLY_IN_USE" EntityType="Self.ROOMS_NOT_CURRENTLY_IN_USE" store:Type="Views" store:Schema="SYSTEM">
+            <DefiningQuery>SELECT 
+"ROOMS_NOT_CURRENTLY_IN_USE"."ROOM_NO" AS "ROOM_NO", 
+"ROOMS_NOT_CURRENTLY_IN_USE"."ROOM_TYPE" AS "ROOM_TYPE", 
+"ROOMS_NOT_CURRENTLY_IN_USE"."STATUS" AS "STATUS"
+FROM "SYSTEM"."ROOMS_NOT_CURRENTLY_IN_USE" "ROOMS_NOT_CURRENTLY_IN_USE"</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_RESERVATIONS_ADMINS" Association="Self.FK_RESERVATIONS_ADMINS">
+            <End Role="ADMINS" EntitySet="ADMINS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATIONS_CUSTOMERS" Association="Self.FK_RESERVATIONS_CUSTOMERS">
+            <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATIONS_ROOMS" Association="Self.FK_RESERVATIONS_ROOMS">
+            <End Role="ROOMS" EntitySet="ROOMS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROOMS_ROOMRATES" Association="Self.FK_ROOMS_ROOMRATES">
+            <End Role="ROOMRATES" EntitySet="ROOMRATES" />
+            <End Role="ROOMS" EntitySet="ROOMS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ADMIN">
+          <Key>
+            <PropertyRef Name="ADMIN_ID" />
+          </Key>
+          <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+          <Property Name="USERNAME" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PASSWORD" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FAILED_ATTEMPTS" Type="Boolean" />
+          <Property Name="BLOCK_TIME" Type="DateTime" Precision="6" />
+          <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_ADMINS" FromRole="ADMINS" ToRole="RESERVATIONS" />
+        </EntityType>
+        <EntityType Name="CUSTOMER">
+          <Key>
+            <PropertyRef Name="CUST_ID" />
+          </Key>
+          <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+          <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DOB" Type="DateTime" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="MOBILE_NO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="LOYALTY" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_CUSTOMERS" FromRole="CUSTOMERS" ToRole="RESERVATIONS" />
+        </EntityType>
+        <EntityType Name="RESERVATION">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+          <Property Name="CUST_ID" Type="Int32" Nullable="false" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="Decimal" Precision="6" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RES_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ADMIN" Relationship="Self.FK_RESERVATIONS_ADMINS" FromRole="RESERVATIONS" ToRole="ADMINS" />
+          <NavigationProperty Name="CUSTOMER" Relationship="Self.FK_RESERVATIONS_CUSTOMERS" FromRole="RESERVATIONS" ToRole="CUSTOMERS" />
+          <NavigationProperty Name="ROOM" Relationship="Self.FK_RESERVATIONS_ROOMS" FromRole="RESERVATIONS" ToRole="ROOMS" />
+        </EntityType>
+        <EntityType Name="ROOMRATE">
+          <Key>
+            <PropertyRef Name="ROOM_TYPE" />
+          </Key>
+          <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DESCRIPTION" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RATE" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <NavigationProperty Name="ROOMS" Relationship="Self.FK_ROOMS_ROOMRATES" FromRole="ROOMRATES" ToRole="ROOMS" />
+        </EntityType>
+        <EntityType Name="ROOM">
+          <Key>
+            <PropertyRef Name="ROOM_NO" />
+          </Key>
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="RESERVATIONS" Relationship="Self.FK_RESERVATIONS_ROOMS" FromRole="ROOMS" ToRole="RESERVATIONS" />
+          <NavigationProperty Name="ROOMRATE" Relationship="Self.FK_ROOMS_ROOMRATES" FromRole="ROOMS" ToRole="ROOMRATES" />
+        </EntityType>
+        <EntityType Name="ALL_CHECK_INS_TODAY">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ADMIN_ID" />
+            <PropertyRef Name="DATE_ARRIVE" />
+            <PropertyRef Name="DATE_DEPART" />
+            <PropertyRef Name="TOTAL_COST" />
+            <PropertyRef Name="CHECK_IN" />
+            <PropertyRef Name="CHECK_OUT" />
+            <PropertyRef Name="RES_STATUS" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ADMIN_ID" Type="Byte" Nullable="false" />
+          <Property Name="CUST_ID" Type="Byte" />
+          <Property Name="DATE_ARRIVE" Type="DateTime" Nullable="false" />
+          <Property Name="DATE_DEPART" Type="DateTime" Nullable="false" />
+          <Property Name="TOTAL_COST" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="CHECK_IN" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CHECK_OUT" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RES_STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GET_CUST_NAME_FOR_CANCEL">
+          <Key>
+            <PropertyRef Name="RES_ID" />
+            <PropertyRef Name="FORENAME" />
+            <PropertyRef Name="SURNAME" />
+          </Key>
+          <Property Name="RES_ID" Type="Int32" Nullable="false" />
+          <Property Name="FORENAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SURNAME" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROOMS_NOT_CURRENTLY_IN_USE">
+          <Key>
+            <PropertyRef Name="ROOM_NO" />
+            <PropertyRef Name="ROOM_TYPE" />
+            <PropertyRef Name="STATUS" />
+          </Key>
+          <Property Name="ROOM_NO" Type="Byte" Nullable="false" />
+          <Property Name="ROOM_TYPE" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="STATUS" Type="String" MaxLength="1" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_RESERVATIONS_ADMINS">
+          <End Role="ADMINS" Type="Self.ADMIN" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ADMINS">
+              <PropertyRef Name="ADMIN_ID" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="ADMIN_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATIONS_CUSTOMERS">
+          <End Role="CUSTOMERS" Type="Self.CUSTOMER" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CUSTOMERS">
+              <PropertyRef Name="CUST_ID" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="CUST_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RESERVATIONS_ROOMS">
+          <End Role="ROOMS" Type="Self.ROOM" Multiplicity="1" />
+          <End Role="RESERVATIONS" Type="Self.RESERVATION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOMS">
+              <PropertyRef Name="ROOM_NO" />
+            </Principal>
+            <Dependent Role="RESERVATIONS">
+              <PropertyRef Name="ROOM_NO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROOMS_ROOMRATES">
+          <End Role="ROOMRATES" Type="Self.ROOMRATE" Multiplicity="1" />
+          <End Role="ROOMS" Type="Self.ROOM" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROOMRATES">
+              <PropertyRef Name="ROOM_TYPE" />
+            </Principal>
+            <Dependent Role="ROOMS">
+              <PropertyRef Name="ROOM_TYPE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HotelEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ADMINS" EntityType="Self.ADMIN" />
+          <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMER" />
+          <EntitySet Name="RESERVATIONS" EntityType="Self.RESERVATION" />
+          <EntitySet Name="ROOMRATES" EntityType="Self.ROOMRATE" />
+          <EntitySet Name="ROOMS" EntityType="Self.ROOM" />
+          <EntitySet Name="ALL_CHECK_INS_TODAY" EntityType="Self.ALL_CHECK_INS_TODAY" />
+          <EntitySet Name="GET_CUST_NAME_FOR_CANCEL" EntityType="Self.GET_CUST_NAME_FOR_CANCEL" />
+          <EntitySet Name="ROOMS_NOT_CURRENTLY_IN_USE" EntityType="Self.ROOMS_NOT_CURRENTLY_IN_USE" />
+          <AssociationSet Name="FK_RESERVATIONS_ADMINS" Association="Self.FK_RESERVATIONS_ADMINS">
+            <End Role="ADMINS" EntitySet="ADMINS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATIONS_CUSTOMERS" Association="Self.FK_RESERVATIONS_CUSTOMERS">
+            <End Role="CUSTOMERS" EntitySet="CUSTOMERS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RESERVATIONS_ROOMS" Association="Self.FK_RESERVATIONS_ROOMS">
+            <End Role="ROOMS" EntitySet="ROOMS" />
+            <End Role="RESERVATIONS" EntitySet="RESERVATIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROOMS_ROOMRATES" Association="Self.FK_ROOMS_ROOMRATES">
+            <End Role="ROOMRATES" EntitySet="ROOMRATES" />
+            <End Role="ROOMS" EntitySet="ROOMS" />
+          </AssociationSet>
+          <FunctionImport Name="SP_ADMINLOGINCHECK">
+            <Parameter Name="GET_ENTERED_USERNAME" Mode="In" Type="String" />
+            <Parameter Name="GET_ENTERED_PASSWORD" Mode="In" Type="String" />
+            <Parameter Name="GET_EXISTING_USERNAME" Mode="Out" Type="String" />
+            <Parameter Name="GET_EXISTING_PASSWORD" Mode="Out" Type="String" />
+            <Parameter Name="GET_FAILED_ATTEMPTS" Mode="InOut" Type="Decimal" />
+            <Parameter Name="GET_BLOCKTIME" Mode="Out" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelModelStoreContainer" CdmEntityContainer="HotelEntities">
+          <EntitySetMapping Name="ADMINS">
+            <EntityTypeMapping TypeName="HotelModel.ADMIN">
+              <MappingFragment StoreEntitySet="ADMINS">
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="FAILED_ATTEMPTS" ColumnName="FAILED_ATTEMPTS" />
+                <ScalarProperty Name="BLOCK_TIME" ColumnName="BLOCK_TIME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CUSTOMERS">
+            <EntityTypeMapping TypeName="HotelModel.CUSTOMER">
+              <MappingFragment StoreEntitySet="CUSTOMERS">
+                <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+                <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="MOBILE_NO" ColumnName="MOBILE_NO" />
+                <ScalarProperty Name="LOYALTY" ColumnName="LOYALTY" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RESERVATIONS">
+            <EntityTypeMapping TypeName="HotelModel.RESERVATION">
+              <MappingFragment StoreEntitySet="RESERVATIONS">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+                <ScalarProperty Name="CHECK_IN" ColumnName="CHECK_IN" />
+                <ScalarProperty Name="CHECK_OUT" ColumnName="CHECK_OUT" />
+                <ScalarProperty Name="RES_STATUS" ColumnName="RES_STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOMRATES">
+            <EntityTypeMapping TypeName="HotelModel.ROOMRATE">
+              <MappingFragment StoreEntitySet="ROOMRATES">
+                <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+                <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+                <ScalarProperty Name="RATE" ColumnName="RATE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOMS">
+            <EntityTypeMapping TypeName="HotelModel.ROOM">
+              <MappingFragment StoreEntitySet="ROOMS">
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ALL_CHECK_INS_TODAY">
+            <EntityTypeMapping TypeName="HotelModel.ALL_CHECK_INS_TODAY">
+              <MappingFragment StoreEntitySet="ALL_CHECK_INS_TODAY">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ADMIN_ID" ColumnName="ADMIN_ID" />
+                <ScalarProperty Name="CUST_ID" ColumnName="CUST_ID" />
+                <ScalarProperty Name="DATE_ARRIVE" ColumnName="DATE_ARRIVE" />
+                <ScalarProperty Name="DATE_DEPART" ColumnName="DATE_DEPART" />
+                <ScalarProperty Name="TOTAL_COST" ColumnName="TOTAL_COST" />
+                <ScalarProperty Name="CHECK_IN" ColumnName="CHECK_IN" />
+                <ScalarProperty Name="CHECK_OUT" ColumnName="CHECK_OUT" />
+                <ScalarProperty Name="RES_STATUS" ColumnName="RES_STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GET_CUST_NAME_FOR_CANCEL">
+            <EntityTypeMapping TypeName="HotelModel.GET_CUST_NAME_FOR_CANCEL">
+              <MappingFragment StoreEntitySet="GET_CUST_NAME_FOR_CANCEL">
+                <ScalarProperty Name="RES_ID" ColumnName="RES_ID" />
+                <ScalarProperty Name="FORENAME" ColumnName="FORENAME" />
+                <ScalarProperty Name="SURNAME" ColumnName="SURNAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROOMS_NOT_CURRENTLY_IN_USE">
+            <EntityTypeMapping TypeName="HotelModel.ROOMS_NOT_CURRENTLY_IN_USE">
+              <MappingFragment StoreEntitySet="ROOMS_NOT_CURRENTLY_IN_USE">
+                <ScalarProperty Name="ROOM_NO" ColumnName="ROOM_NO" />
+                <ScalarProperty Name="ROOM_TYPE" ColumnName="ROOM_TYPE" />
+                <ScalarProperty Name="STATUS" ColumnName="STATUS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_ADMINLOGINCHECK" FunctionName="HotelModel.Store.SP_ADMINLOGINCHECK" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
