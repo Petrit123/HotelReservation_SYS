@@ -48,5 +48,14 @@ namespace HotelReservation_SYS
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_ADMINLOGINCHECK", gET_ENTERED_USERNAMEParameter, gET_ENTERED_PASSWORDParameter, gET_EXISTING_USERNAME, gET_EXISTING_PASSWORD, gET_FAILED_ATTEMPTS, gET_BLOCKTIME);
         }
+    
+        public virtual int SP_SEARCHEXISTINGCUST(string c_FORENAME, ObjectParameter o_CUST_ID, ObjectParameter o_FORENAME, ObjectParameter o_SURNAME, ObjectParameter o_DOB, ObjectParameter o_EMAIL, ObjectParameter o_MOBILE_NO, ObjectParameter o_LOYALTY)
+        {
+            var c_FORENAMEParameter = c_FORENAME != null ?
+                new ObjectParameter("C_FORENAME", c_FORENAME) :
+                new ObjectParameter("C_FORENAME", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_SEARCHEXISTINGCUST", c_FORENAMEParameter, o_CUST_ID, o_FORENAME, o_SURNAME, o_DOB, o_EMAIL, o_MOBILE_NO, o_LOYALTY);
+        }
     }
 }

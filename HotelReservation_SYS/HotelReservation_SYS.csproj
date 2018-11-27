@@ -73,11 +73,24 @@
     <Compile Include="ADMIN.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="adminsTable.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>adminsTable.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ALL_CHECK_INS_TODAY.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
     <Compile Include="CUSTOMER.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersDataSet.cs">
+      <DependentUpon>CustomersDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="CustomersDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomersDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="GET_CUST_NAME_FOR_CANCEL.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
@@ -144,6 +157,28 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>HotelModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="adminsTable.xsc">
+      <DependentUpon>adminsTable.xsd</DependentUpon>
+    </None>
+    <None Include="adminsTable.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>adminsTable.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="adminsTable.xss">
+      <DependentUpon>adminsTable.xsd</DependentUpon>
+    </None>
+    <None Include="CustomersDataSet.xsc">
+      <DependentUpon>CustomersDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="CustomersDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>CustomersDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CustomersDataSet.xss">
+      <DependentUpon>CustomersDataSet.xsd</DependentUpon>
+    </None>
     <None Include="HotelModel.edmx.diagram">
       <DependentUpon>HotelModel.edmx</DependentUpon>
     </None>
@@ -160,6 +195,9 @@
     <Resource Include="Images\hotel.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="HotelModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>HotelModel.edmx</DependentUpon>
@@ -172,7 +210,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

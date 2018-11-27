@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HotelModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HotelModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ADMINS">
           <Key>
             <PropertyRef Name="ADMIN_ID" />
@@ -163,6 +163,16 @@ warning 6002: The table/view 'SYSTEM.ROOMS_NOT_CURRENTLY_IN_USE' does not have a
           <Parameter Name="GET_FAILED_ATTEMPTS" Type="number" Mode="InOut" />
           <Parameter Name="GET_BLOCKTIME" Type="timestamp" Mode="Out" />
         </Function>
+        <Function Name="SP_SEARCHEXISTINGCUST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SYSTEM">
+          <Parameter Name="C_FORENAME" Type="varchar2" Mode="In" />
+          <Parameter Name="O_CUST_ID" Type="number" Mode="Out" />
+          <Parameter Name="O_FORENAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_SURNAME" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_DOB" Type="date" Mode="Out" />
+          <Parameter Name="O_EMAIL" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_MOBILE_NO" Type="varchar2" Mode="Out" />
+          <Parameter Name="O_LOYALTY" Type="varchar2" Mode="Out" />
+        </Function>
         <EntityContainer Name="HotelModelStoreContainer">
           <EntitySet Name="ADMINS" EntityType="Self.ADMINS" Schema="SYSTEM" store:Type="Tables" />
           <EntitySet Name="CUSTOMERS" EntityType="Self.CUSTOMERS" Schema="SYSTEM" store:Type="Tables" />
@@ -214,8 +224,7 @@ FROM "SYSTEM"."ROOMS_NOT_CURRENTLY_IN_USE" "ROOMS_NOT_CURRENTLY_IN_USE"</Definin
             <End Role="ROOMS" EntitySet="ROOMS" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -404,6 +413,16 @@ FROM "SYSTEM"."ROOMS_NOT_CURRENTLY_IN_USE" "ROOMS_NOT_CURRENTLY_IN_USE"</Definin
             <Parameter Name="GET_FAILED_ATTEMPTS" Mode="InOut" Type="Decimal" />
             <Parameter Name="GET_BLOCKTIME" Mode="Out" Type="DateTime" />
           </FunctionImport>
+          <FunctionImport Name="SP_SEARCHEXISTINGCUST">
+            <Parameter Name="C_FORENAME" Mode="In" Type="String" />
+            <Parameter Name="O_CUST_ID" Mode="Out" Type="Decimal" />
+            <Parameter Name="O_FORENAME" Mode="Out" Type="String" />
+            <Parameter Name="O_SURNAME" Mode="Out" Type="String" />
+            <Parameter Name="O_DOB" Mode="Out" Type="DateTime" />
+            <Parameter Name="O_EMAIL" Mode="Out" Type="String" />
+            <Parameter Name="O_MOBILE_NO" Mode="Out" Type="String" />
+            <Parameter Name="O_LOYALTY" Mode="Out" Type="String" />
+          </FunctionImport>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -504,6 +523,7 @@ FROM "SYSTEM"."ROOMS_NOT_CURRENTLY_IN_USE" "ROOMS_NOT_CURRENTLY_IN_USE"</Definin
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_ADMINLOGINCHECK" FunctionName="HotelModel.Store.SP_ADMINLOGINCHECK" />
+          <FunctionImportMapping FunctionImportName="SP_SEARCHEXISTINGCUST" FunctionName="HotelModel.Store.SP_SEARCHEXISTINGCUST" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
