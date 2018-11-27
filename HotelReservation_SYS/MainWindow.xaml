@@ -474,6 +474,8 @@
         <CollectionViewSource x:Key="cUSTOMERSViewSource" Source="{Binding CUSTOMERS, Source={StaticResource customersDataSet}}"/>
         <local:adminsTable x:Key="adminsTable"/>
         <CollectionViewSource x:Key="aDMINSViewSource" Source="{Binding ADMINS, Source={StaticResource adminsTable}}"/>
+        <local:View_RoomRates_DataSet x:Key="view_RoomRates_DataSet"/>
+        <CollectionViewSource x:Key="v_ROOMRATESViewSource" Source="{Binding V_ROOMRATES, Source={StaticResource view_RoomRates_DataSet}}"/>
     </Window.Resources>
     <Grid Margin="0,0,0,-0.667" DataContext="{StaticResource cUSTOMERSViewSource}">
         <Grid.ColumnDefinitions>
@@ -510,8 +512,92 @@
         <Button x:Name="newCustBtn" Content="New Customer" HorizontalAlignment="Left" Margin="31,383,0,0" VerticalAlignment="Top" Width="305" Style="{DynamicResource ButtonStyle3}" FontSize="20" Click="newCustBtn_Click" Visibility="Hidden"/>
         <Button Content="Search" HorizontalAlignment="Left" Margin="355,51,0,0" VerticalAlignment="Top" Width="48" Style="{DynamicResource ButtonStyle4}" RenderTransformOrigin="-0.485,0.583" Click="Button_Click_2" Grid.Column="1" Visibility="Hidden"/>
         <TextBox x:Name="txtExistingCust" Tag="Customer Name" HorizontalAlignment="Left" Height="51" TextWrapping="Wrap" VerticalAlignment="Top" Width="179" Grid.Column="1" Margin="97.667,52,0,0" Style="{DynamicResource TextBoxStyle3}" FontFamily="Comic Sans MS" Visibility="Hidden"/>
-        <DataGrid x:Name="adminGrd" HorizontalAlignment="Left" Height="232" Margin="501,168,0,0" VerticalAlignment="Top" Width="634" Grid.ColumnSpan="2" ItemsSource="{Binding Source={StaticResource aDMINSViewSource}}" />
         <Grid x:Name="grid1" HorizontalAlignment="Left" Margin="133,477,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <DataGrid x:Name="aDMINSDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource aDMINSViewSource}}" Margin="22,383,80.333,188.333" RowDetailsVisibilityMode="VisibleWhenSelected" Visibility="Visible" SelectionChanged="aDMINSDataGrid_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="aDMIN_IDColumn" Binding="{Binding ADMIN_ID}" Header="ADMIN ID" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="uSERNAMEColumn" Binding="{Binding USERNAME}" Header="USERNAME" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="pASSWORDColumn" Binding="{Binding PASSWORD}" Header="PASSWORD" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="fAILED_ATTEMPTSColumn" Binding="{Binding FAILED_ATTEMPTS}" Header="FAILED ATTEMPTS" Width="SizeToHeader"/>
+                <DataGridTemplateColumn x:Name="bLOCK_TIMEColumn" Header="BLOCK TIME" Width="SizeToHeader">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding BLOCK_TIME, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="v_ROOMRATESDataGrid" AutoGenerateColumns="False" Grid.Column="1" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource v_ROOMRATESViewSource}}" Margin="9.667,52,578.333,519.333" RowDetailsVisibilityMode="VisibleWhenSelected">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="rOOM_TYPEColumn" Binding="{Binding ROOM_TYPE}" Header="ROOM TYPE" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="dESCRIPTIONColumn" Binding="{Binding DESCRIPTION}" Header="DESCRIPTION" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="rATEColumn" Binding="{Binding RATE}" Header="RATE" Width="SizeToHeader"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid x:Name="grid3" Grid.Column="1" HorizontalAlignment="Left" Margin="39.667,392,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="grid4" Grid.Column="1" HorizontalAlignment="Left" Margin="53.667,476,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="grid5" Grid.Column="1" HorizontalAlignment="Left" Margin="54.667,548,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="grid6" Grid.Column="1" HorizontalAlignment="Left" Margin="56.667,621,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="grid7" Grid.Column="1" HorizontalAlignment="Left" Margin="69.667,672,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="grid8" Grid.Column="1" HorizontalAlignment="Left" Margin="102.667,736,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+        </Grid>
+        <Grid x:Name="grid2" Grid.Column="1" HorizontalAlignment="Left" Margin="393.667,63,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -522,7 +608,7 @@
             <Label Content="CUST ID:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="cUST_IDTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding CUST_ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
-        <Grid x:Name="grid2" HorizontalAlignment="Left" Margin="160,557,0,0" VerticalAlignment="Top">
+        <Grid x:Name="grid9" Grid.Column="1" HorizontalAlignment="Left" Margin="393.667,136,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
@@ -532,6 +618,61 @@
             </Grid.RowDefinitions>
             <Label Content="FORENAME:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="fORENAMETextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding FORENAME, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid10" Grid.Column="1" HorizontalAlignment="Left" Margin="399.667,221,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="SURNAME:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="sURNAMETextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding SURNAME, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid11" Grid.Column="1" HorizontalAlignment="Left" Margin="415.667,301,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="DOB:" Grid.Column="0" HorizontalAlignment="Left" Margin="0,3" Grid.Row="0" VerticalAlignment="Center"/>
+            <DatePicker x:Name="dOBDatePicker" Grid.Column="1" HorizontalAlignment="Left" Margin="3" Grid.Row="0" SelectedDate="{Binding DOB, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center"/>
+        </Grid>
+        <Grid x:Name="grid12" Grid.Column="1" HorizontalAlignment="Left" Margin="456.667,373,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="EMAIL:" Grid.Column="0" HorizontalAlignment="Left" Margin="-36,0,0,6" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="eMAILTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding EMAIL, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid13" Grid.Column="1" HorizontalAlignment="Left" Margin="469.667,443,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="MOBILE NO:" Grid.Column="0" HorizontalAlignment="Left" Margin="-49,2,0,4" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="mOBILE_NOTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding MOBILE_NO, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <Grid x:Name="grid14" Grid.Column="1" HorizontalAlignment="Left" Margin="444.667,527,0,0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="LOYALTY:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
+            <TextBox x:Name="lOYALTYTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding LOYALTY, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

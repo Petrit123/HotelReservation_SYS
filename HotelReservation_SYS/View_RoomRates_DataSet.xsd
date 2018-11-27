@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="View_RoomRates_DataSet" targetNamespace="http://tempuri.org/View_RoomRates_DataSet.xsd" xmlns:mstns="http://tempuri.org/View_RoomRates_DataSet.xsd" xmlns="http://tempuri.org/View_RoomRates_DataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" ParameterPrefix=":" PropertyReference="ApplicationSettings.HotelReservation_SYS.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="Oracle.ManagedDataAccess.Client" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="V_ROOMRATESTableAdapter" GeneratorDataComponentClassName="V_ROOMRATESTableAdapter" Name="V_ROOMRATES" UserDataComponentName="V_ROOMRATESTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="SYSTEM.V_ROOMRATES" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT ROOM_TYPE, DESCRIPTION, RATE FROM SYSTEM.V_ROOMRATES</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="ROOM_TYPE" DataSetColumn="ROOM_TYPE" />
+              <Mapping SourceColumn="DESCRIPTION" DataSetColumn="DESCRIPTION" />
+              <Mapping SourceColumn="RATE" DataSetColumn="RATE" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="View_RoomRates_DataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="View_RoomRates_DataSet" msprop:Generator_UserDSName="View_RoomRates_DataSet">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="V_ROOMRATES" msprop:Generator_TableClassName="V_ROOMRATESDataTable" msprop:Generator_TableVarName="tableV_ROOMRATES" msprop:Generator_TablePropName="V_ROOMRATES" msprop:Generator_RowDeletingName="V_ROOMRATESRowDeleting" msprop:Generator_RowChangingName="V_ROOMRATESRowChanging" msprop:Generator_RowEvHandlerName="V_ROOMRATESRowChangeEventHandler" msprop:Generator_RowDeletedName="V_ROOMRATESRowDeleted" msprop:Generator_UserTableName="V_ROOMRATES" msprop:Generator_RowChangedName="V_ROOMRATESRowChanged" msprop:Generator_RowEvArgName="V_ROOMRATESRowChangeEvent" msprop:Generator_RowClassName="V_ROOMRATESRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ROOM_TYPE" msprop:Generator_ColumnVarNameInTable="columnROOM_TYPE" msprop:Generator_ColumnPropNameInRow="ROOM_TYPE" msprop:Generator_ColumnPropNameInTable="ROOM_TYPEColumn" msprop:Generator_UserColumnName="ROOM_TYPE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="3" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DESCRIPTION" msprop:Generator_ColumnVarNameInTable="columnDESCRIPTION" msprop:Generator_ColumnPropNameInRow="DESCRIPTION" msprop:Generator_ColumnPropNameInTable="DESCRIPTIONColumn" msprop:Generator_UserColumnName="DESCRIPTION">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="30" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RATE" msprop:Generator_ColumnVarNameInTable="columnRATE" msprop:Generator_ColumnPropNameInRow="RATE" msprop:Generator_ColumnPropNameInTable="RATEColumn" msprop:Generator_UserColumnName="RATE" type="xs:float" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

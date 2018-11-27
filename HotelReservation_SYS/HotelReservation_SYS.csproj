@@ -112,6 +112,11 @@
     <Compile Include="ROOMS_NOT_CURRENTLY_IN_USE.cs">
       <DependentUpon>HotelModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="View_RoomRates_DataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>View_RoomRates_DataSet.xsd</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -186,6 +191,17 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="View_RoomRates_DataSet.xsc">
+      <DependentUpon>View_RoomRates_DataSet.xsd</DependentUpon>
+    </None>
+    <None Include="View_RoomRates_DataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>View_RoomRates_DataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="View_RoomRates_DataSet.xss">
+      <DependentUpon>View_RoomRates_DataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>

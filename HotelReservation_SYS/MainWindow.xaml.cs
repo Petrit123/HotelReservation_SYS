@@ -53,11 +53,13 @@ namespace HotelReservation_SYS
             if (txtPassword.Password.ToString() == (string)existingPassword.Value)
             {
 
-                MessageBox.Show("Welcome " + txtUsername.Text);
+                MessageBox.Show("Welcome " + (string)existingUsername.Value);
                 loginBorder.Visibility = Visibility.Hidden;
-                //existingCustBtn.Visibility = Visibility.Hidden;
+                aDMINSDataGrid.Visibility = Visibility.Visible;
                 
-            }
+                
+            }  
+            
 
            
         
@@ -114,6 +116,12 @@ namespace HotelReservation_SYS
             adminsTableADMINSTableAdapter.Fill(adminsTable.ADMINS);
             System.Windows.Data.CollectionViewSource aDMINSViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("aDMINSViewSource")));
             aDMINSViewSource.View.MoveCurrentToFirst();
+            HotelReservation_SYS.View_RoomRates_DataSet view_RoomRates_DataSet = ((HotelReservation_SYS.View_RoomRates_DataSet)(this.FindResource("view_RoomRates_DataSet")));
+            // Load data into the table V_ROOMRATES. You can modify this code as needed.
+            HotelReservation_SYS.View_RoomRates_DataSetTableAdapters.V_ROOMRATESTableAdapter view_RoomRates_DataSetV_ROOMRATESTableAdapter = new HotelReservation_SYS.View_RoomRates_DataSetTableAdapters.V_ROOMRATESTableAdapter();
+            view_RoomRates_DataSetV_ROOMRATESTableAdapter.Fill(view_RoomRates_DataSet.V_ROOMRATES);
+            System.Windows.Data.CollectionViewSource v_ROOMRATESViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("v_ROOMRATESViewSource")));
+            v_ROOMRATESViewSource.View.MoveCurrentToFirst();
         }
 
         private void existingCustGrd_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -122,6 +130,11 @@ namespace HotelReservation_SYS
         }
 
         private void newCustBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void aDMINSDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
