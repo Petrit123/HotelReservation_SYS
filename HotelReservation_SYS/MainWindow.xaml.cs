@@ -17,7 +17,6 @@ using System.Data;
 using System.Data.SqlClient;
 using HotelReservation_SYS.CustomersDataSetTableAdapters;
 
-
 namespace HotelReservation_SYS
 {
     /// <summary>
@@ -52,7 +51,7 @@ namespace HotelReservation_SYS
             try
             {
                 hotelEntities.SP_ADMINLOGINCHECK(txtUsername.Text, txtPassword.Password.ToString(), existingUsername, existingPassword, failedAttempts, blockTime);
-         
+
 
                 if (txtPassword.Password.ToString() == (string)existingPassword.Value)
                 {
@@ -64,12 +63,12 @@ namespace HotelReservation_SYS
 
 
                 }
+               
             } 
             catch(System.Data.Entity.Core.EntityCommandExecutionException ex)
             {
                 MessageBox.Show(ex.InnerException.Message);
-                
-                
+               
 
             }
 
