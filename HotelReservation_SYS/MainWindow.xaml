@@ -933,7 +933,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <ComboBox Grid.Column="1" HorizontalAlignment="Left" Height="36" Margin="443.667,82,0,0" VerticalAlignment="Top" Width="233" DisplayMemberPath="FORENAME"  ItemsSource="{Binding}" SelectedValuePath="FORENAME" Style="{DynamicResource ComboBoxStyle1}" FocusVisualStyle="{DynamicResource FocusVisual}"/>
-        <Label Content="Room Rates" Grid.Column="1" HorizontalAlignment="Left" Margin="27.667,20,0,0" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="24"/>
+        <Label Content="Room Rates View" Grid.Column="1" HorizontalAlignment="Left" Margin="3.667,20,0,0" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="24" Foreground="Red"/>
         <Grid x:Name="grid2" Grid.Column="1" HorizontalAlignment="Left" Margin="450.667,155,0,0" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -1009,6 +1009,7 @@
             <Label Content="LOYALTY:" Grid.Column="0" HorizontalAlignment="Left" Margin="3" Grid.Row="0" VerticalAlignment="Center"/>
             <TextBox x:Name="lOYALTYTextBox" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="3" Grid.Row="0" Text="{Binding LOYALTY, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="120"/>
         </Grid>
+        <Label Content="Customers" Foreground="Red" Grid.Column="1" HorizontalAlignment="Left" Margin="443.667,20,0,0" VerticalAlignment="Top" FontFamily="Comic Sans MS" FontSize="24"/>
 
     </Grid>
 </Window>
