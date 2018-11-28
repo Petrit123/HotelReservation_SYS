@@ -17,6 +17,7 @@ using System.Data;
 using System.Data.SqlClient;
 using HotelReservation_SYS.CustomersDataSetTableAdapters;
 
+
 namespace HotelReservation_SYS
 {
     /// <summary>
@@ -45,24 +46,38 @@ namespace HotelReservation_SYS
             ObjectParameter failedAttempts = new ObjectParameter("GET_FAILED_ATTEMPTS", typeof(Int16));
             ObjectParameter blockTime = new ObjectParameter("GET_BLOCKTIME", typeof(DateTime));
 
-           
 
-            
-            hotelEntities.SP_ADMINLOGINCHECK(txtUsername.Text, txtPassword.Password.ToString(), existingUsername, existingPassword, failedAttempts, blockTime);
-            
-            if (txtPassword.Password.ToString() == (string)existingPassword.Value)
+
+
+            try
             {
+                hotelEntities.SP_ADMINLOGINCHECK(txtUsername.Text, txtPassword.Password.ToString(), existingUsername, existingPassword, failedAttempts, blockTime);
+         
 
-                MessageBox.Show("Welcome " + (string)existingUsername.Value);
-                loginBorder.Visibility = Visibility.Hidden;
-                aDMINSDataGrid.Visibility = Visibility.Visible;
+                if (txtPassword.Password.ToString() == (string)existingPassword.Value)
+                {
+
+                    MessageBox.Show("Welcome " + (string)existingUsername.Value);
+                    loginBorder.Visibility = Visibility.Hidden;
+                    aDMINSDataGrid.Visibility = Visibility.Visible;
+
+
+
+                }
+            } 
+            catch(System.Data.Entity.Core.EntityCommandExecutionException ex)
+            {
+                MessageBox.Show(ex.InnerException.Message);
                 
                 
-            }  
-            
+
+            }
 
            
-        
+
+
+
+
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
