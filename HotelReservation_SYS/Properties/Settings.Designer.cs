@@ -26,7 +26,7 @@ namespace HotelReservation_SYS.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("DATA SOURCE=DESKTOP-48B82J5:1521/XE;PASSWORD=Harden13;USER ID=SYSTEM")]
+        [global::System.Configuration.DefaultSettingValueAttribute("DATA SOURCE=#######;PASSWORD=######;USER ID=#####")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));
